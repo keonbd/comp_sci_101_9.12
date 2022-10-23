@@ -1,0 +1,80 @@
+def printM():
+    print('MENU')
+    print('a - Add player')
+    print('d - Remove player')
+    print('u - Update player rating')
+    print('r - Output players above a rating')
+    print('o - Output roster')
+    print('q - Quit')
+    print()
+    print('Choose an option:')
+
+def sorted_dict():
+    for key, value in sorted(roster.items()):
+        print('Jersey number: {:d}, Rating: {:d}'.format(key, value))
+    print()
+
+def adding():
+    # note: roster is a dictionary
+    new_player_jersey_num = int(input("Enter a new player's jersey number:\n"))
+    new_player_rating = int(input("Enter the player's rating:\n"))
+    roster[new_player_jersey_num] = new_player_rating
+
+def remover():
+    # note: roster is a dictionary
+    jersey_num_remove = int(input("Enter a jersey number:\n"))
+    if jersey_num_remove in roster:
+        roster.pop(jersey_num_remove)
+def update():
+    # note: roster is a dictionary
+    jersey_number = int(input("Enter a jersey number:\n"))
+    new_rating = int(input("Enter a new rating for player:\n"))
+    roster.update({jersey_number: new_rating})
+if __name__ == "__main__":
+    roster = {}
+    for i in range(5):
+        jnum = int(input("Enter player {:d}'s jersey number:\n".format(i+1)))
+        rating = int(input("Enter player {:d}'s rating:\n".format(i+1)))
+        print()
+        roster[jnum] = rating
+    print("ROSTER")
+    sorted_dict()
+    printM()
+    option = input()
+    while True:
+        if option == 'q':
+            break
+        elif option == 'a':
+            adding()
+            print()
+            printM()
+            option = input()
+            continue
+        elif option == 'd':
+            remover()
+            print()
+            printM()
+            option = input()
+            continue
+        elif option == 'u':
+            update()
+            print()
+            printM()
+            option = input()
+            continue
+        elif option == 'r':
+            u_rating = int(input("Enter a rating:\n"))
+            print("ABOVE {:d}".format(u_rating))
+            for player, rating in sorted(roster.items()):
+                if rating > u_rating:
+                    print('Jersey number: {:d}, Rating: {:d}'.format(player, rating))
+            print()
+            printM()
+            option = input()
+            continue
+        elif option == 'o':
+            print("ROSTER")
+            sorted_dict()
+            printM()
+            option = input()
+            continue
